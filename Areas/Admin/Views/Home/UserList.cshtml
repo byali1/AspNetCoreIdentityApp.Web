@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "UserList";
+}
+@model List<UserViewModel>
+
+<div class="text-center">
+    <h1>UserList</h1>
+</div>
+
+
+<div class="container">
+    <table class="table table-secondary table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">PhoneNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

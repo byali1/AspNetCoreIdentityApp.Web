@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "SignUp";
+}
+
+@model SignUpViewModel
+
+<div class="text-center"><h1>Kayıt Formu</h1></div>
+
+<div class="row d-flex justify-content-center mt-4">
+
+    <div class="col-md-6">
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Kayıt başarılı!</strong> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        else if (!String.IsNullOrEmpty(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Kayıt olunamadı!</strong> @ViewBag.ErrorMessage
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+        <form asp-controller="Home" asp-action="SignUp" method="post">
+            <div class="row mb-3">
+                <label for="Email" class="col-sm-2 col-form-label" asp-for="Email"></label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" asp-for="Email" required>
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Username" class="col-sm-2 col-form-label" asp-for="Username" style="font-size:0.95rem"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="Username" required>
+                    <span asp-validation-for="Username" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="PhoneNumber" class="col-sm-2 col-form-label" asp-for="PhoneNumber"></label>
+                <div class="col-sm-10">
+                    <input type="Phone" class="form-control" asp-for="PhoneNumber" required>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="Password" class="col-sm-2 col-form-label" asp-for="Password"></label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" asp-for="Password" required>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ConfirmPassword" class="col-sm-2 col-form-label" asp-for="PasswordConfirmed"></label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" asp-for="PasswordConfirmed" required>
+                    <span asp-validation-for="PasswordConfirmed" class="text-danger"></span>
+
+                </div>
+            </div>
+
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+            </div>
+
+
+        </form>
+        
+        <div asp-validation-summary="ModelOnly" class="alert alert-warning alert-dismissible fade show d-flex align-items-center mt-4" role="alert">
+            <i class="bi bi-exclamation-triangle-fill fs-2"></i>   
+            <span  class="ms-4">
+            </span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
