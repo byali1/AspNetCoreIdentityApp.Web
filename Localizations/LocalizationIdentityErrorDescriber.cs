@@ -19,7 +19,7 @@ namespace AspNetCoreIdentityApp.Web.Localizations
 
         public override IdentityError PasswordTooShort(int length)
         {
-            return new() { Code = "PasswordTooShort", Description = "Şifreniz en az 12 karakter olmalıdır." };
+            return new() { Code = "PasswordTooShort", Description = "Şifreniz en az 6 karakter olmalıdır." };
 
         }
 
@@ -28,9 +28,25 @@ namespace AspNetCoreIdentityApp.Web.Localizations
             return new() { Code = "PasswordRequiresDigit", Description = "Şifreniz en az bir tane rakam içermelidir." };
         }
 
+        public override IdentityError PasswordRequiresUpper()
+        {
+            return new() { Code = "PasswordRequiresUpper", Description = "Şifreniz en az bir tane büyük harf içermelidir." };
+        }
+
+
+        public override IdentityError PasswordRequiresLower()
+        {
+            return new() { Code = "PasswordRequiresLower", Description = "Şifreniz en az bir tane küçük harf içermelidir." };
+        }
+
+
         public override IdentityError PasswordRequiresNonAlphanumeric()
         {
-            return new() { Code = "PasswordRequiresNonAlphanumeric", Description = "Şifreniz en az bir tane alfanumerik olmayan karakter içermelidir.[@?*!&/#] vb." };
+            return new()
+            {
+                Code = "PasswordRequiresNonAlphanumeric",
+                Description = "Şifreniz en az bir tane alfanumerik olmayan karakter içermelidir.[@?*!&/#] vb."
+            };
         }
     }
 }

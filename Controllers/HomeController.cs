@@ -1,6 +1,7 @@
 ﻿using AspNetCoreIdentityApp.Web.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using AspNetCoreIdentityApp.Web.Extensions;
 using AspNetCoreIdentityApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
@@ -11,15 +12,16 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         //Identity
         private readonly UserManager<AppUser> _userManager;
         //private readonly RoleManager<AppRole> _roleManager;
-        //private readonly SignInManager<> ;
+        private readonly SignInManager<AppUser> _signInManager;
 
 
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _logger = logger;
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
@@ -31,6 +33,52 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult SignIn()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SignInViewModel request, string? returnUrl = null)
+        {
+            // ?? -> null ise
+            returnUrl = returnUrl ?? Url.Action("Index", "Home");
+
+            var userResult = await _userManager.FindByEmailAsync(request.Email);
+
+            if (userResult == null)
+            {
+                ModelState.AddModelError(string.Empty, "Email veya şifre yanlış");
+                return View();
+            }
+
+            var signInResult = await _signInManager.PasswordSignInAsync(userResult, request.Password, request.RememberMe, true);
+
+            if (signInResult.Succeeded)
+            {
+                return Redirect(returnUrl);
+            }
+
+            if (signInResult.IsLockedOut)
+            {
+                var serverDateTime = DateTime.UtcNow;
+                var lockoutEndDateTimeOffset = await _userManager.GetLockoutEndDateAsync(userResult);
+
+                var lockoutEndDateUtc = lockoutEndDateTimeOffset.Value.UtcDateTime;
+                var result = Math.Abs(Convert.ToInt16((serverDateTime - lockoutEndDateUtc).TotalSeconds));
+
+                ModelState.AddModelErrorList(new List<string>() { $"{result} saniye boyunca giriş yapamazsınız." });
+                return View();
+            }
+
+            ModelState.AddModelErrorList(new List<string>() { "Email veya şifre yanlış!" });
+
+            return View();
+        }
+
+
+
 
         public IActionResult SignUp()
         {

@@ -16,6 +16,20 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //Extensions
 builder.Services.AddIdentityExtension();
 
+
+//Cookie
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    var cookieBuilder = new CookieBuilder();
+    cookieBuilder.Name = "IndoPlantCookie";
+
+    options.LoginPath = new PathString("/Home/Signin");
+    options.Cookie = cookieBuilder;
+    options.ExpireTimeSpan = TimeSpan.FromDays(30);
+    options.SlidingExpiration = true;
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
