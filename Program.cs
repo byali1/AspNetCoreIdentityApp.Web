@@ -25,6 +25,7 @@ builder.Services.ConfigureApplicationCookie(options =>
     cookieBuilder.Name = "IdentityAppCookie";
 
     options.LoginPath = new PathString("/Home/SignIn");
+    options.LogoutPath = new PathString("/Member/Logout");
     options.Cookie = cookieBuilder;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
     options.SlidingExpiration = true; //Kullanýcý her giriþ yaptýðýnda süre 30 gün olacak.
