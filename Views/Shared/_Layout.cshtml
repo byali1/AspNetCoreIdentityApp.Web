@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="~/AspNetCoreIdentityApp.Web.styles.css" asp-append-version="true" />
     <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+          rel="stylesheet" />
 </head>
 <body>
     <header>
@@ -28,19 +30,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="SignUp">Üye Ol</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-danger" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
                         </li>
                     </ul>
                 </div>
-                <div>
-                    <a class="btn btn-warning text-dark me-3" asp-controller="Home" asp-action="SignUp">Üye ol</a>
-                </div>
-                <div>
-                    <a class="btn btn-success" asp-controller="Home" asp-action="SignIn">Giriş yap</a>
-                </div>
+
+                <partial name="_NavbarLogin"/>
+
             </div>
         </nav>
     </header>

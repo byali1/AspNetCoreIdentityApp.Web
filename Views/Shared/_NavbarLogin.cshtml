@@ -1,0 +1,30 @@
+﻿@*  Kullanıcı login mi ? *@
+@if (User.Identity!.IsAuthenticated)
+{
+    var userName = User.Identity.Name;
+    if (userName.Length > 10)
+    {
+        userName = userName.Substring(0, 10) + "..";
+    }
+
+    <div class="ui compact menu">
+        <div class="ui simple dropdown item">
+            @userName
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" asp-controller="Home" asp-action="Error"><i class="bi bi-gear-fill me-2"></i>Ayarlar</a>
+                <a class="item"><i class="bi bi-box-arrow-right me-2"></i>Çıkış yap</a>
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div>
+        <a class="btn btn-warning text-dark me-3" asp-controller="Home" asp-action="SignUp">Üye ol</a>
+    </div>
+    <div>
+        <a class="btn btn-success me-3" asp-controller="Home" asp-action="SignIn">Giriş yap</a>
+    </div>
+}

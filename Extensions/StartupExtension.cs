@@ -13,7 +13,7 @@ namespace AspNetCoreIdentityApp.Web.Extensions
             {
                 //User
                 options.User.RequireUniqueEmail = true;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnoprstuvwxyz123456789_";
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ123456789_";
 
                 //Password
                 options.Password.RequiredLength = 12;
