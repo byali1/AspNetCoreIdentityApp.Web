@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="~/AspNetCoreIdentityApp.Web.styles.css" asp-append-version="true" />
     <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
     <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-          rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css" integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <header>
@@ -35,7 +35,7 @@
                     </ul>
                 </div>
 
-                <partial name="_NavbarLogin"/>
+                <partial name="_NavbarLogin" />
 
             </div>
         </nav>
@@ -51,9 +51,30 @@
             &copy; 2024 - AspNetCoreIdentityApp.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js" integrity="sha512-Xo0Jh8MsOn72LGV8kU5LsclG7SUzJsWGhXbWcYs2MAmChkQzwiW/yTQwdJ8w6UA9C6EVG18GHb/TrYpYCjyAQw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var closeButtons = document.querySelectorAll('.message .close');
+            closeButtons.forEach(function (button) {
+                button.addEventListener('click', function () {
+                    var message = this.closest('.message');
+                    message.style.opacity = '0.5';
+                    setTimeout(function () {
+                        message.style.display = 'none';
+                    }, 200);
+                });
+            });
+        });
+
+    </script>
+
+@await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

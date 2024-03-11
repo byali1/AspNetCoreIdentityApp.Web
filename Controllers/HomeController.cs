@@ -120,6 +120,44 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 
         }
 
+        public IActionResult ForgotMyPassword()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgotMyPassword(ForgotMyPasswordViewModel request)
+        {
+            // http://localhost:5185?userId=1=&token=aaaaaaaaaaaa
+
+            bool userFound = false;
+
+            var hasUser = await _userManager.FindByEmailAsync(request.Email);
+
+            if (hasUser == null)
+            {
+                TempData["UserFound"] = userFound;
+                ModelState.AddModelError(string.Empty, "Bu e-mail ile bir kullanıcı bulunamadı.");
+                return View();
+            }
+
+            string passwordResetToken = await _userManager.GeneratePasswordResetTokenAsync(hasUser);
+
+            var passwordResetLink =
+                Url.Action("ResetPassword", "Home", new { userId = hasUser.Id, token = passwordResetToken });
+
+            userFound = true;
+            TempData["UserFound"] = userFound;
+
+            return RedirectToAction(nameof(ForgotMyPassword));
+
+        }
+
+
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
