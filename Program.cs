@@ -1,5 +1,8 @@
 using AspNetCoreIdentityApp.Web.Extensions;
 using AspNetCoreIdentityApp.Web.Models;
+using AspNetCoreIdentityApp.Web.OptionsModels;
+using AspNetCoreIdentityApp.Web.Services.Abstract;
+using AspNetCoreIdentityApp.Web.Services.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +19,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Extensions
 builder.Services.AddIdentityExtension();
+
+
+//EmailService
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 
 
