@@ -5,6 +5,7 @@ using AspNetCoreIdentityApp.Web.Extensions;
 using AspNetCoreIdentityApp.Web.Services.Abstract;
 using AspNetCoreIdentityApp.Web.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace AspNetCoreIdentityApp.Web.Controllers
 {
@@ -46,7 +47,7 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         public async Task<IActionResult> SignIn(SignInViewModel request, string? returnUrl = null)
         {
             // ?? -> null ise
-            returnUrl = returnUrl ?? Url.Action("Index", "Home");
+            returnUrl ??= Url.Action("Index", "Home");
 
             var userResult = await _userManager.FindByEmailAsync(request.Email);
 
@@ -157,6 +158,52 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 
             return RedirectToAction(nameof(ForgotMyPassword));
 
+        }
+
+        public IActionResult ResetPassword(string userId, string token)
+        {
+            TempData["userId"] = userId;
+            TempData["token"] = token;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel request)
+        {
+            bool isPasswordUpdated = false;
+
+            var userId = TempData["userId"];
+            var token = TempData["token"];
+
+            //Güncellenecek
+            if (userId == null || token == null)
+            {
+
+                RedirectToAction("Error");
+            }
+
+            var hasUser = await _userManager.FindByIdAsync(userId.ToString()!);
+
+            if (hasUser == null)
+            {
+                TempData["isPasswordUpdated"] = isPasswordUpdated;
+                ModelState.AddModelError(string.Empty, "Kullanıcı bulunamadı.");
+                return View();
+            }
+
+            var result = await _userManager.ResetPasswordAsync(hasUser, token.ToString()!, request.Password);
+
+            if (result.Succeeded!)
+            {
+                isPasswordUpdated = true;
+                TempData["isPasswordUpdated"] = isPasswordUpdated;
+            }
+            else
+            {
+                ModelState.AddModelErrorList(result.Errors.Select(x => x.Description).ToList());
+            }
+
+            return View();
         }
 
 

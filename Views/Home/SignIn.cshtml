@@ -16,12 +16,12 @@
         <form class="border p-4 rounded-1 " asp-controller="Home" asp-action="SignIn" asp-route-returnurl="@Context.Request.Query["returnUrl"]" method="post">
             <div class="mb-3">
                 <label for="Email" class="form-label" asp-for="Email"></label>
-                <input value="ali_ilgin@outlook.com" class="form-control" asp-for="Email" required>
+                <input value="byali.ilgin@gmail.com" class="form-control" asp-for="Email" required>
                 <span class="text-danger" asp-validation-for="Email"></span>
             </div>
             <div class="mb-3">
                 <label for="Password" class="form-label" asp-for="Password"></label>
-                <input value="http://localhost:5185/Home/SignUp" type="password" class="form-control" asp-for="Password" required>
+                <input value="http://localhost:5185/Home/ResetPassword" type="password" class="form-control" asp-for="Password" required>
             </div>
 
             <div class="row mb-3">
