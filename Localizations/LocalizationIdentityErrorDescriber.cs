@@ -48,5 +48,14 @@ namespace AspNetCoreIdentityApp.Web.Localizations
                 Description = "Şifreniz en az bir tane alfanumerik olmayan karakter içermelidir.[@?*!&/#] vb."
             };
         }
+
+        public override IdentityError InvalidToken()
+        {
+            return new()
+            {
+                Code = "InvalidToken",
+                Description = "Bu token artık geçerli değil! Yeni bir istekte bulunun."
+            };
+        }
     }
 }

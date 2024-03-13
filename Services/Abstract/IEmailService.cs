@@ -2,6 +2,7 @@
 {
     public interface IEmailService
     {
-        Task SendResetPasswordEmailAsync(string resetEmailLink, string toEmail);
+        Task SendResetPasswordEmailAsync(string resetEmailLink, string toEmail, string userName);
+        Task SendResetPasswordIsSuccessfulAsync(string userName, string toEmail);
     }
 }

@@ -59,7 +59,7 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 
             var signInResult = await _signInManager.PasswordSignInAsync(userResult, request.Password, request.RememberMe, true);
 
-            if (signInResult.Succeeded)
+            if (signInResult.Succeeded!)
             {
                 return Redirect(returnUrl);
             }
@@ -151,7 +151,8 @@ namespace AspNetCoreIdentityApp.Web.Controllers
             var passwordResetLink =
                 Url.Action("ResetPassword", "Home", new { userId = hasUser.Id, token = passwordResetToken }, HttpContext.Request.Scheme);
 
-            await _emailService.SendResetPasswordEmailAsync(passwordResetLink, hasUser.Email);
+            //Send an email
+            await _emailService.SendResetPasswordEmailAsync(passwordResetLink!, hasUser.Email!, hasUser.UserName!);
 
             userFound = true;
             TempData["UserFound"] = userFound;
@@ -172,17 +173,17 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         {
             bool isPasswordUpdated = false;
 
-            var userId = TempData["userId"];
-            var token = TempData["token"];
-
-            //Güncellenecek
-            if (userId == null || token == null)
+            if (TempData["userId"] == null || TempData["token"] == null)
             {
-
-                RedirectToAction("Error");
+                // userId veya token null ise hata sayfasına yönlendir.
+                return RedirectToAction("Error");
             }
 
-            var hasUser = await _userManager.FindByIdAsync(userId.ToString()!);
+            // TempData'dan okunan değerlerin string olarak kabul edileceğinden emin olun
+            string userId = TempData["userId"].ToString()!;
+            string token = TempData["token"].ToString()!;
+
+            var hasUser = await _userManager.FindByIdAsync(userId);
 
             if (hasUser == null)
             {
@@ -191,12 +192,15 @@ namespace AspNetCoreIdentityApp.Web.Controllers
                 return View();
             }
 
-            var result = await _userManager.ResetPasswordAsync(hasUser, token.ToString()!, request.Password);
+            var result = await _userManager.ResetPasswordAsync(hasUser, token, request.Password);
 
-            if (result.Succeeded!)
+            if (result.Succeeded)
             {
                 isPasswordUpdated = true;
                 TempData["isPasswordUpdated"] = isPasswordUpdated;
+
+                //Sen an email - PasswordUpdatedInfo
+                await _emailService.SendResetPasswordIsSuccessfulAsync(hasUser.UserName!, hasUser.Email!);
             }
             else
             {
@@ -205,6 +209,7 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 
             return View();
         }
+
 
 
 
