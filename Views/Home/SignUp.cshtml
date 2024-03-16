@@ -33,6 +33,24 @@
 
         <form asp-controller="Home" asp-action="SignUp" method="post">
             <div class="row mb-3">
+                <label for="FirstName" class="col-sm-2 col-form-label" asp-for="FirstName"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="FirstName" required>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label for="LastName" class="col-sm-2 col-form-label" asp-for="LastName"></label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" asp-for="LastName" required>
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            
+            
+
+            <div class="row mb-3">
                 <label for="Email" class="col-sm-2 col-form-label" asp-for="Email"></label>
                 <div class="col-sm-10">
                     <input type="email" class="form-control" asp-for="Email" required>

@@ -23,7 +23,7 @@ namespace AspNetCoreIdentityApp.Web.ViewModels
         [Display(Name = "Kullanıcı adı:")]
         public string Username { get; set; }
 
-        /*
+
 
         [MinLength(2, ErrorMessage = "Bu alan 2 karakterden az olamaz.")]
         [MaxLength(25, ErrorMessage = "Bu alan 25 karakterden fazla olamaz.")]
@@ -35,9 +35,9 @@ namespace AspNetCoreIdentityApp.Web.ViewModels
         [MaxLength(25, ErrorMessage = "Bu alan 25 karakterden fazla olamaz.")]
         [Required(ErrorMessage = "Bu kısım boş olamaz.")]
         [Display(Name = "Soy isim:")]
-        public string LastName { get; set; } 
+        public string LastName { get; set; }
 
-        */
+
 
         [EmailAddress(ErrorMessage = "E-mail adresiniz doğru formatta değil.")]
         [Required(ErrorMessage = "Bu kısım boş olamaz.")]

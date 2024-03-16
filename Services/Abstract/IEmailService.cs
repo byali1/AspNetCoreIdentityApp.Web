@@ -1,4 +1,6 @@
-﻿namespace AspNetCoreIdentityApp.Web.Services.Abstract
+﻿using AspNetCoreIdentityApp.Web.Models;
+
+namespace AspNetCoreIdentityApp.Web.Services.Abstract
 {
     public interface IEmailService
     {

@@ -6,6 +6,7 @@ using AspNetCoreIdentityApp.Web.Services.Abstract;
 using AspNetCoreIdentityApp.Web.Services.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Extensions
 builder.Services.AddIdentityExtension();
+
+
+builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
 
 
 //EmailService

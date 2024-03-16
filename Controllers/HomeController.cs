@@ -103,6 +103,8 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 
             var identityResult = await _userManager.CreateAsync(new AppUser
             {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 UserName = request.Username,
                 Email = request.Email,
                 PhoneNumber = request.PhoneNumber

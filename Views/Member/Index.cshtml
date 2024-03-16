@@ -9,8 +9,25 @@
     <div class="row">
         <div class="col-md-6 ">
             <div class="ui floating message mb-5">
-                <p class="fs-6"><strong>Merhaba @User.Identity.Name</strong>, hesap detaylarını burada görüntüleyebilirsin.</p>
+                <p class="fs-6"><strong>Merhaba @Model.FirstName</strong>, hesap detaylarını burada görüntüleyebilirsin.</p>
             </div>
+            
+            <div class="ui form">
+                <div class="two fields ">
+
+                    <div class="field">
+                        <label>İsim:</label>
+                        <input value="@Model.FirstName" readonly="" type="text" wfd-id="id56">
+                    </div>
+
+                    <div class="field">
+                        <label>Soyisim:</label>
+                        <input value="@Model.LastName" readonly="" type="email" wfd-id="id57">
+                    </div>
+
+                </div>
+            </div>
+
 
             <div class="ui form">
                 <div class="two fields ">
@@ -47,7 +64,7 @@
                             <button class="ui negative basic button twoFactorSituation">Kapalı</button>
                         }
                     </div>
-                    
+
                     <div class="field text-center">
                         <label>Mail onay durumu:</label>
                         @if (@Model.EmailConfirmed)
@@ -64,17 +81,24 @@
             </div>
 
             <div class="mt-5 text-center" id="infoToUpdate">
-                <strong class="text-danger">*</strong> <a class="text-dark" asp-action="UserSettings">Bu bilgileri değiştirmek için buraya tıklayabilirsin</a>
+                <strong class="text-danger">*</strong> <a class="text-dark" asp-action="EditUser">Bu bilgileri değiştirmek için buraya tıklayabilirsin</a>
             </div>
         </div>
-        
+
         <div class="col-md-6">
-            <div class="float-end  ui large fluid image">
-                <img class="rounded-1" id= "imgMemberIndex" src="https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&amp;w=1974&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            <div class="text-center col-md-6 offset-md-3 ui medium fluid image">
+                @if (ViewData["PictureUrl"] == null)
+                {
+                    <img class="rounded-circle" src="~/uploads/userPictures/defaultUserPhoto.jpg" ; />
+                }
+                else
+                {
+                    <img class="rounded-circle" src="~/uploads/userPictures/@ViewData["PictureUrl"]" ; />
+                }
+
             </div>
         </div>
 
 
     </div>
 </div>
-

@@ -1,5 +1,7 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using System.Text.Encodings.Web;
+using AspNetCoreIdentityApp.Web.Models;
 using AspNetCoreIdentityApp.Web.OptionsModels;
 using AspNetCoreIdentityApp.Web.Services.Abstract;
 using Microsoft.Extensions.Options;
@@ -164,5 +166,9 @@ namespace AspNetCoreIdentityApp.Web.Services.Concrete
             mailMessage.IsBodyHtml = true;
             smptClient.SendMailAsync(mailMessage);
         }
+
+
+
+
     }
 }
