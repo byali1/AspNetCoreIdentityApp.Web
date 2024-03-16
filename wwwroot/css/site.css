@@ -22,7 +22,6 @@ body {
 }
 
 a, a:link, a:visited, a:active {
-    color: white;
     text-decoration: none;
     cursor: pointer;
 }
@@ -30,4 +29,14 @@ a, a:link, a:visited, a:active {
 .hover:hover {
     opacity: 0.82;
     cursor: pointer;
+}
+
+.twoFactorSituation {
+    cursor: none;
+}
+
+
+
+#imgMemberIndex:hover {
+    opacity: 0.95;
 }

@@ -1,14 +1,80 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Hesabım";
 }
 
+@model UserViewModel
 
-<div class="container">
+<div class="container mt-5">
+
     <div class="row">
-        <div class="ui floating message ">
-            <p class="fs-6">Merhaba @User.Identity.Name, hesap detayların burada. :)</p>
+        <div class="col-md-6 ">
+            <div class="ui floating message mb-5">
+                <p class="fs-6"><strong>Merhaba @User.Identity.Name</strong>, hesap detaylarını burada görüntüleyebilirsin.</p>
+            </div>
+
+            <div class="ui form">
+                <div class="two fields ">
+
+                    <div class="field">
+                        <label>Kullanıcı adı:</label>
+                        <input value="@Model.UserName" readonly="" type="text" wfd-id="id56">
+                    </div>
+
+                    <div class="field">
+                        <label>Email:</label>
+                        <input value="@Model.Email" readonly="" type="email" wfd-id="id57">
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="ui form mt-4">
+                <div class="three fields ">
+
+                    <div class="field">
+                        <label>Telefon numarası:</label>
+                        <input value="@Model.PhoneNumber" readonly="" type="tel" wfd-id="id58">
+                    </div>
+
+                    <div class="field text-center">
+                        <label>2 Adımlı doğrulama:</label>
+                        @if (@Model.TwoFactorEnabled)
+                        {
+                            <button class="ui positive basic button twoFactorSituation">Aktif</button>
+                        }
+                        else
+                        {
+                            <button class="ui negative basic button twoFactorSituation">Kapalı</button>
+                        }
+                    </div>
+                    
+                    <div class="field text-center">
+                        <label>Mail onay durumu:</label>
+                        @if (@Model.EmailConfirmed)
+                        {
+                            <button class="ui positive basic button twoFactorSituation">Onaylandı</button>
+                        }
+                        else
+                        {
+                            <button class="ui negative basic button twoFactorSituation">Onaylanmadı</button>
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="mt-5 text-center" id="infoToUpdate">
+                <strong class="text-danger">*</strong> <a class="text-dark" asp-action="UserSettings">Bu bilgileri değiştirmek için buraya tıklayabilirsin</a>
+            </div>
         </div>
+        
+        <div class="col-md-6">
+            <div class="float-end  ui large fluid image">
+                <img class="rounded-1" id= "imgMemberIndex" src="https://images.unsplash.com/photo-1584589167171-541ce45f1eea?q=80&amp;w=1974&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
+            </div>
+        </div>
+
+
     </div>
 </div>
 

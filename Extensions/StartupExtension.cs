@@ -1,6 +1,9 @@
 ﻿using AspNetCoreIdentityApp.Web.CustomValidations;
 using AspNetCoreIdentityApp.Web.Localizations;
 using AspNetCoreIdentityApp.Web.Models;
+using AspNetCoreIdentityApp.Web.OptionsModels;
+using AspNetCoreIdentityApp.Web.Services.Abstract;
+using AspNetCoreIdentityApp.Web.Services.Concrete;
 using Microsoft.AspNetCore.Identity;
 
 namespace AspNetCoreIdentityApp.Web.Extensions
@@ -24,7 +27,7 @@ namespace AspNetCoreIdentityApp.Web.Extensions
                 options.User.AllowedUserNameCharacters = "abcdefghijklmnoprstuvwxyzABCDEFGHIJKLMNOPRSTUVWXYZ123456789_";
 
                 //Password
-                options.Password.RequiredLength = 12;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = true; //!*
                 options.Password.RequireLowercase = true;
                 options.Password.RequireUppercase = true;
