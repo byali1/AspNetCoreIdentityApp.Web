@@ -1,8 +1,6 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿
 
-// Write your JavaScript code.
-
+//To close alert messages
 document.addEventListener('DOMContentLoaded', function () {
     var closeButtons = document.querySelectorAll('.message .close');
     closeButtons.forEach(function (button) {
@@ -15,3 +13,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+
+//Show - hide password for password inputs
+document.querySelectorAll('.btn-password-eye').forEach(button => {
+    button.addEventListener('click', function () {
+        const passwordInput = button.previousElementSibling;
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            button.innerHTML = '<i class="bi bi-eye-fill fs-6"></i>'; // show
+        } else {
+            passwordInput.type = 'password';
+            button.innerHTML = '<i class="bi bi-eye-slash fs-6"></i>'; // hide
+        }
+    });
+});
+
+

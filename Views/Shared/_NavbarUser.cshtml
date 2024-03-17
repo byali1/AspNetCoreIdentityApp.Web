@@ -9,9 +9,20 @@
 
     <div class="ui compact menu">
         <div class="ui simple dropdown item">
+            @if (ViewData["PictureUrl"] == null)
+            {
+                <img class="ui avatar image me-3" src="~/uploads/userPictures/defaultUserPhoto.jpg">
+            }
+            else
+            {
+                <img class="ui avatar image me-3" src="~/uploads/userPictures/@ViewData["PictureUrl"]">
+            }
+
+            
             @userName.ToLower()
             <i class="dropdown icon"></i>
             <div class="menu fs-5">
+
                 <a class="item" asp-controller="Member" asp-action="Index"><i class="bi bi-person-fill me-2 d-flex justify-content-center"></i></a>
                 <a class="item" asp-controller="Member" asp-action="EditUser"><i class="bi bi-gear-fill me-2 d-flex justify-content-center "></i></a>
                 <a class="item" asp-controller="Member" asp-action="LogOut" asp-route-returnurl="/Home/Index"><i class="bi bi-box-arrow-right me-2 d-flex justify-content-center"></i></a>

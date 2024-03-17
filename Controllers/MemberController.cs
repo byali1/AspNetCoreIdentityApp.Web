@@ -11,14 +11,14 @@ namespace AspNetCoreIdentityApp.Web.Controllers
 {
 
     [Authorize]
-    public class MemberController : Controller
+    public class MemberController : BaseController
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmailService _emailService;
         private readonly IFileProvider _fileProvider;
 
-        public MemberController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager, IEmailService emailService, IFileProvider fileProvider)
+        public MemberController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IEmailService emailService, IFileProvider fileProvider) : base(userManager)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -54,8 +54,9 @@ namespace AspNetCoreIdentityApp.Web.Controllers
         }
 
 
-        public IActionResult ChangePassword()
+        public async Task<IActionResult> ChangePassword()
         {
+            await GetUserPicture();
 
             return View();
         }
