@@ -10,10 +10,6 @@ namespace AspNetCoreIdentityApp.Web.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
-
-
-
         public HomeController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -34,7 +30,10 @@ namespace AspNetCoreIdentityApp.Web.Areas.Admin.Controllers
                 Id = x.Id,
                 Username = x.UserName,
                 Email = x.Email,
-                PhoneNumber = x.PhoneNumber
+                PhoneNumber = x.PhoneNumber,
+                FullName = x.FullName,
+                IsEmailConfirmed = x.EmailConfirmed,
+                IsTwoFactorEnabled = x.TwoFactorEnabled
 
             }).ToList();
 

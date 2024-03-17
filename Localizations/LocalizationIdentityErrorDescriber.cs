@@ -57,5 +57,14 @@ namespace AspNetCoreIdentityApp.Web.Localizations
                 Description = "Bu token artık geçerli değil! Yeni bir istekte bulunun."
             };
         }
+
+        public override IdentityError DuplicateRoleName(string role)
+        {
+            return new()
+            {
+                Code = "DuplicateRoleName",
+                Description = $"'{role}' adında bir rol zaten var."
+            };
+        }
     }
 }

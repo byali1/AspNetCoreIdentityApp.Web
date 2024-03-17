@@ -1,0 +1,58 @@
+﻿@model AdminModel.CreateRoleViewModel
+
+@{
+    ViewData["Title"] = "CreateRole";
+}
+
+<h1>Rol oluştur</h1>
+
+
+<div class="row">
+    <div class="col-md-6">
+        
+        @if (TempData["RoleAdded"] as bool? ?? false)
+        {
+            <div class="ui success message">
+                <i class="close icon"></i>
+                <div class="mt-2">
+                    <p>Rol başarıyla eklendi.</p>
+                </div>
+            </div>
+        }
+        <div asp-validation-summary=ModelOnly class="ui negative message w-75">
+            <i class="close icon"></i>
+            <div class="header">
+                HATA
+            </div>
+            <p></p>
+        </div>
+
+        <form asp-action="CreateRole" method="post">
+
+            <div class="ui form">
+                <div class="two fields ">
+
+                    <div class="field">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" type="text" wfd-id="id57" required>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                </div>
+            </div>
+
+            
+            <div>
+                <button class="ui blue button" type="submit">Oluştur</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
