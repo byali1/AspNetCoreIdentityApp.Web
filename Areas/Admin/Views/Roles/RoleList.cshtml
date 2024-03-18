@@ -1,0 +1,63 @@
+﻿@model List<AdminModel.RoleListViewModel>
+@{
+    ViewData["Title"] = "RoleList";
+}
+
+<div class="text-center d-flex justify-content-between mt-4">
+    <h1 class="fw-light">RoleList</h1>
+
+
+    @if (TempData["RoleDeleted"] as bool? ?? false)
+    {
+        <div class="ui warning message">
+            <i class="close icon"></i>
+            <div class="mt-2 mx-3">
+                <p>Rol silindi.</p>
+            </div>
+        </div>
+    }
+
+    @if (TempData["RoleNotDeleted"] as bool? ?? false)
+    {
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <div class="mt-2 mx-3">
+                <p>Rol silinemedi!</p>
+            </div>
+        </div>
+    }
+
+
+
+    <a asp-action="CreateRole">
+        <button class="ui blue button fw-bold">Rol ekle</button>
+    </a>
+</div>
+
+<div class="container mt-4">
+    <table class="ui red table selectable">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>RoleName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a class="btn btn-warning text-dark me-4" asp-area="Admin" asp-controller="Roles" asp-action="UpdateRole" asp-route-id="@item.Id">Güncelle</a>
+                        <a class="btn btn-danger" asp-area="Admin" asp-controller="Roles" asp-action="DeleteRole" asp-route-id="@item.Id">Sil</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+</div>
+

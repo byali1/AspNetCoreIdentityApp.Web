@@ -1,21 +1,22 @@
-﻿@model AdminModel.CreateRoleViewModel
+﻿
+@model AdminModel.UpdateRoleViewModel
 
 @{
-    ViewData["Title"] = "Rol Oluştur";
+    ViewData["Title"] = "Rol Güncelle";
 }
 
-<h1>Rol Oluştur</h1>
+<h1>Rol Güncelle</h1>
 
 
 <div class="row">
     <div class="col-md-6">
-        
-        @if (TempData["RoleAdded"] as bool? ?? false)
+
+        @if (TempData["RoleUpdated"] as bool? ?? false)
         {
             <div class="ui success message">
                 <i class="close icon"></i>
                 <div class="mt-2">
-                    <p>Rol başarıyla eklendi.</p>
+                    <p>Rol başarıyla güncellendi.</p>
                 </div>
             </div>
         }
@@ -27,7 +28,9 @@
             <p></p>
         </div>
 
-        <form asp-action="CreateRole" method="post">
+        <form asp-action="UpdateRole" method="post">
+            
+            <input type="hidden" asp-for="Id"/>
 
             <div class="ui form">
                 <div class="two fields ">
@@ -41,11 +44,16 @@
                 </div>
             </div>
 
-            
-            <div>
-                <button class="ui blue button" type="submit">Oluştur</button>
+
+            <div class="mt-4">
+                <button class="ui blue button" type="submit">Güncelle</button>
+                <a class="ui black button ms-4" asp-area="Admin" asp-controller="Roles" asp-action="RoleList">Rollere git</a>
             </div>
         </form>
+
+       
+        
+      
     </div>
 </div>
 
@@ -56,3 +64,5 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+
+
