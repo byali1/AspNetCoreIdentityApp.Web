@@ -28,6 +28,28 @@ namespace AspNetCoreIdentityApp.Web.Areas.Admin.Controllers
             var userViewModelList = userList.Select(x => new UserViewModel
             {
                 Id = x.Id,
+                UserPicture = x.Picture,
+                Username = x.UserName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                FullName = x.FullName,
+                IsEmailConfirmed = x.EmailConfirmed,
+                IsTwoFactorEnabled = x.TwoFactorEnabled
+
+            }).ToList();
+
+            return View(userViewModelList);
+        }
+
+
+        public async Task<IActionResult> AdminList()
+        {
+            var adminList = await _userManager.GetUsersInRoleAsync("Admin");
+
+            var userViewModelList = adminList.Select(x => new UserViewModel
+            {
+                Id = x.Id,
+                UserPicture = x.Picture,
                 Username = x.UserName,
                 Email = x.Email,
                 PhoneNumber = x.PhoneNumber,

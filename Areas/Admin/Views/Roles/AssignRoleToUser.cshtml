@@ -1,0 +1,83 @@
+﻿@model AdminModel.UserRoleInfoViewModel
+
+
+@{
+    ViewData["Title"] = "Rol Ata";
+}
+
+<h1>Rol Ata</h1>
+
+<div class="row">
+    <div class="col-md-6">
+
+       
+
+
+        <div asp-validation-summary=ModelOnly class="ui negative message w-75">
+            <i class="close icon"></i>
+            <div class="header">
+                HATA
+            </div>
+            <p></p>
+        </div>
+
+        <form class="mt-4" asp-route-userId="@ViewBag.userId" asp-action="AssignRoleToUser" method="post">
+
+            <div class="row">
+                @for (int i = 0; i < Model.AssignRoleToUserViewModel.Count; i++)
+                {
+                    <div class="ui slider checkbox mb-5 col-md-4">
+                        <input type="checkbox" asp-for="@Model.AssignRoleToUserViewModel[i].IsExist">
+                        @*  <input type="checkbox" class="form-check-input" asp-for="@Model.AssignRoleToUserViewModel[i].IsExist"> *@
+                        <label>@Model.AssignRoleToUserViewModel[i].RoleName</label>
+                        <input type="hidden" asp-for="@Model.AssignRoleToUserViewModel[i].RoleName" />
+                        <input type="hidden" asp-for="@Model.AssignRoleToUserViewModel[i].RoleId" />
+                    </div>
+                }
+            </div>
+
+            <div class="mt-5">
+                <a class="ui black button me-4" onclick="history.back()"><i class="bi bi-arrow-left-circle me-2"></i>Geri dön</a>
+                <button class="ui blue button ms-4" type="submit">Rolü ata</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="ui card">
+            <div class="image">
+                @if (@Model.UserGeneralViewModel.UserPicture != null)
+                {
+                    <img src="~/uploads/userPictures/@Model.UserGeneralViewModel.UserPicture">
+
+                }
+                else
+                {
+                    <img src="~/uploads/userPictures/defaultUserPhoto.jpg">
+                }
+            </div>
+            <div class="content text-center">
+                <p class="header">@Model.UserGeneralViewModel.FullName</p>
+                <div class="meta">
+                    <p>@Model.UserGeneralViewModel.Username</p>
+                </div>
+                <div class="description">
+                    @Model.UserGeneralViewModel.Email
+                </div>
+            </div>
+            <div class="extra content">
+                <p class="text-dark text-center">
+                    <strong class="text-danger">*</strong>Bu kullanıcı için rol ataması yapıyorsunuz.
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

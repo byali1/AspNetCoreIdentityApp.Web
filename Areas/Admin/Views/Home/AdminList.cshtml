@@ -1,27 +1,15 @@
 ﻿@{
-    ViewData["Title"] = "UserList";
+    ViewData["Title"] = "Admin Listesi";
 }
 @model List<AdminModel.UserViewModel>
 
 <div class="text-center">
-    <h1 class="fw-light">Kullanıcı Listesi</h1>
+    <h1 class="fw-light">Admin Listesi</h1>
 </div>
-
-@if (TempData["RoleAssigned"] as bool? ?? false)
-{
-    <div class="row d-flex justify-content-center mt-4">
-        <div class="ui success message w-25">
-            <i class="close icon"></i>
-            <div class="mt-2">
-                <p>Rol düzenlemesi başarıyla yapıldı.</p>
-            </div>
-        </div>
-    </div>
-}
 
 
 <div class="container mt-4">
-    <table class="ui  celled table selectable text-center">
+    <table class="ui very basic collapsing celled table selectable text-center">
         <thead>
             <tr>
                 <th>Id</th>
@@ -32,20 +20,19 @@
                 <th>PhoneNumber</th>
                 <th>EmailConfirmed</th>
                 <th>2-FactorEnabled</th>
-                <th>Role</th>
                 <th>RoleOperation</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr >
                     <td>@item.Id</td>
                     <td>
 
                         @if (@item.UserPicture != null)
                         {
-                            <img class="ui avatar image" src="~/uploads/userPictures/@item.UserPicture"/>
+                            <img class="ui avatar image" src="~/uploads/userPictures/@item.UserPicture" />
                         }
                         else
                         {
@@ -84,10 +71,7 @@
                             </div>
                         }
                     </td>
-                    <td>
-                        <user-role-names user-id="@item.Id"></user-role-names>
-                    </td>
-                    <td>
+                    <td >
                         <a class="ui inverted blue button" asp-area="Admin" asp-controller="Roles" asp-action="AssignRoleToUser" asp-route-userId="@item.Id">Rol ata</a>
                     </td>
                 </tr>
