@@ -46,6 +46,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
     options.LoginPath = new PathString("/Home/SignIn");
     options.LogoutPath = new PathString("/Member/Logout");
+    options.AccessDeniedPath = new PathString("/Accounts/AccessDenied");
     options.Cookie = cookieBuilder;
     options.ExpireTimeSpan = TimeSpan.FromDays(30);
     options.SlidingExpiration = true; //Kullanýcý her giriþ yaptýðýnda süre 30 gün olacak.

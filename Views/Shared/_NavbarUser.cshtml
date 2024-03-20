@@ -1,4 +1,5 @@
-﻿@*  Kullanıcı login mi ? *@
+﻿@using System.Security.Claims
+@*  Kullanıcı login mi ? *@
 @if (User.Identity!.IsAuthenticated)
 {
     var userName = User.Identity.Name;
@@ -7,6 +8,11 @@
         userName = userName.Substring(0, 10) + "..";
     }
 
+    @if (User.HasClaim(x => x.Type == ClaimTypes.Role && x.Value == "Admin"))
+    {
+        <a class="text-danger me-4" asp-area="Admin" asp-controller="Home" asp-action="Index">Admin</a>
+    }
+   
     <div class="ui compact menu">
         <div class="ui simple dropdown item">
             @if (ViewData["PictureUrl"] == null)
