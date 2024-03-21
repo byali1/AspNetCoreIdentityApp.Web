@@ -44,7 +44,9 @@ namespace AspNetCoreIdentityApp.Web.ViewModels
         [Display(Name = "Email:")]
         public string Email { get; set; }
 
-
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Geçersiz telefon numarası formatı.")]
+        [MinLength(2, ErrorMessage = "Bu alan 2 karakterden az olamaz.")]
+        [MaxLength(10, ErrorMessage = "Bu alan 10 karakterden fazla olamaz.")]
         [Required(ErrorMessage = "Bu kısım boş olamaz.")]
         [Display(Name = "Telefon:")]
         public string PhoneNumber { get; set; }
